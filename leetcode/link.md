@@ -1,4 +1,4 @@
-##### 反转链表
+##### 反转链表 [206](https://leetcode-cn.com/problems/reverse-linked-list/)
 ```go
 /**
  * Definition for singly-linked list.
@@ -36,7 +36,7 @@ func reverseList(head *ListNode) *ListNode {
     return pre
 }
 ```
-##### 两两交换链表
+##### 两两交换链表 [24](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)
 ```go
 /**
  * Definition for singly-linked list.
@@ -113,3 +113,14 @@ func removeElements(head *ListNode, val int) *ListNode {
 }
 
 ```
+
+##### 判断是否有环 [141](https://leetcode-cn.com/problems/linked-list-cycle/)
+
+
+##### 环形链表2 [142](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
+
+##### k 个一组进行翻转 [25](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)
+
+##### 合并两个有序链表 [21](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+
+##### 

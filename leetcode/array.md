@@ -1,6 +1,5 @@
 #### 数组
-##### 移动 0
-- https://leetcode-cn.com/problems/move-zeroes/
+##### 移动 0 [283](https://leetcode-cn.com/problems/move-zeroes/)
 ```go
 func moveZeroes(nums []int)  {
     firstEero := 0
@@ -31,8 +30,8 @@ func moveZeroes(nums []int)  {
 
 ```
 
-##### 计算面积
-https://leetcode-cn.com/problems/container-with-most-water/submissions/
+##### 计算面积 [11](https://leetcode-cn.com/problems/container-with-most-water/submissions/)
+
 ```go
 func maxArea(height []int) int {
 	left := 0
@@ -57,8 +56,7 @@ func maxArea(height []int) int {
 
 ```
 
-##### 爬楼梯
-https://leetcode-cn.com/problems/climbing-stairs/submissions/
+##### 爬楼梯 [70](https://leetcode-cn.com/problems/climbing-stairs/)
 ```go
 func climbStairs(n int) int {
     if n < 3 {
@@ -79,7 +77,7 @@ func climbStairs(n int) int {
     return num
 }
 ```
-##### 两数之和
+##### 两数之和 [1](https://leetcode-cn.com/problems/two-sum/)
 ```go
 func twoSum(nums []int, target int) []int {
 	temp := make(map[int]int)
@@ -120,7 +118,7 @@ func twoSum(nums []int, target int) []int {
 }
 ```
 
-##### 三数之和
+##### 三数之和 [15](https://leetcode-cn.com/problems/3sum/)
 暴力
 ```go
 
@@ -128,10 +126,54 @@ func twoSum(nums []int, target int) []int {
 双指针
 ```go
 
+func threeSum(nums []int) [][]int {
+    	sort.Ints(nums)
+	res := make([][]int, 0)
 
+	for k := 0; k < len(nums)-2; k++ {
+		if nums[k] > 0 {
+			break
+		}
+
+		m := k + 1
+		n := len(nums) - 1
+
+		for m < n {
+			sum := nums[k] + nums[m] + nums[n]
+			switch {
+			case sum < 0:
+				m++
+			case sum > 0:
+				n--
+			default:
+				res = append(res, []int{nums[k], nums[m], nums[n]})
+
+				for m < n && nums[m] == nums[m+1] {
+					m++
+				}
+				for m < n && nums[n] == nums[n-1] {
+					n--
+				}
+
+				m++
+				n--
+
+			}
+		}
+
+		// 处理重复的 num[k]
+		for nums[k+1] == nums[k] && k < len(nums)-2 {
+			k++
+		}
+	}
+
+	return res
+}
 ```
 
-##### 数组去重
+##### 四数之和 [18](https://leetcode-cn.com/problems/4sum/)
+
+##### 数组去重 [26](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 ```go
 func removeDuplicates(nums []int) int {
     
@@ -153,3 +195,11 @@ func removeDuplicates(nums []int) int {
 
 }
 ```
+
+##### 旋转数组 [189](https://leetcode-cn.com/problems/rotate-array/)
+
+
+##### 合并两个有序数组 [88](https://leetcode-cn.com/problems/merge-sorted-array/)
+
+##### 加一 [66](https://leetcode-cn.com/problems/plus-one/)
+
