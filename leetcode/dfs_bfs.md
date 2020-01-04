@@ -73,3 +73,5 @@ def BFS(graph, start, end):
 ##### 单词接龙 II [126](https://leetcode-cn.com/problems/word-ladder-ii/description/)
 
 ##### 岛屿数量 [200](https://leetcode-cn.com/problems/number-of-islands/)
+
+##### 扫雷游戏 [529](https://leetcode-cn.com/problems/minesweeper/description/)
