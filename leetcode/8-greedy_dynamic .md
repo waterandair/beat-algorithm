@@ -3,68 +3,6 @@
 [动态规划](https://zh.wikipedia.org/wiki/动态规划)
 
 [最短路径算法b站视频](https://www.bilibili.com/video/av53233912?from=search&seid=2847395688604491997)
-#### 递归模板
-```
-def recursion(level, param1, param2, ...): 
-    # recursion terminator 
-    if level > MAX_LEVEL: 
-	   process_result 
-	   return 
-
-    # process logic in current level 
-    process(level, data...) 
-
-    # drill down 
-    self.recursion(level + 1, p1, ...) 
-
-    # reverse the current level status if needed
-```
-
-```
-public void recur(int level, int param) { 
-
-  // terminator 
-  if (level > MAX_LEVEL) { 
-    // process result 
-    return; 
-  } 
-
-  // process current logic 
-  process(level, param); 
-
-  // drill down 
-  recur( level: level + 1, newParam); 
-
-  // restore current status 
- 
-}
-```
-
-#### 分治模板
-
-```
-def divide_conquer(problem, param1, param2, ...): 
-  # recursion terminator 
-  if problem is None: 
-	print_result 
-	return 
-
-  # prepare data 
-  data = prepare_data(problem) 
-  subproblems = split_problem(problem, data) 
-
-  # conquer subproblems 
-  subresult1 = self.divide_conquer(subproblems[0], p1, ...) 
-  subresult2 = self.divide_conquer(subproblems[1], p1, ...) 
-  subresult3 = self.divide_conquer(subproblems[2], p1, ...) 
-  …
-
-  # process and generate the final result 
-  result = process_result(subresult1, subresult2, subresult3, …)
-	
-  # revert the current level states
-```
-
 ##### 零钱兑换 [322](https://leetcode-cn.com/problems/coin-change/)
 
 

@@ -1,38 +1,3 @@
-#### 模板思路
-```
-def recursion(level, param1, param2, ...): 
-    # recursion terminator 
-    if level > MAX_LEVEL: 
-	   process_result 
-	   return 
-
-    # process logic in current level 
-    process(level, data...) 
-
-    # drill down 
-    self.recursion(level + 1, p1, ...) 
-
-```
-```java
-public void recur(int level, int param) { 
-
-  // terminator 
-  if (level > MAX_LEVEL) { 
-    // process result 
-    return; 
-  } 
-
-  // process current logic 
-  process(level, param); 
-
-  // drill down 
-  recur( level: level + 1, newParam); 
-
-  // restore current status 
- 
-}
-```
-
 首先找到最小问题的解，然后找到问题解决的过程
 
 ##### 递归数组求和
