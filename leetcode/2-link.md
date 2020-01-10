@@ -113,6 +113,10 @@ func removeElements(head *ListNode, val int) *ListNode {
 }
 
 ```
+递归
+```go
+
+```
 
 ##### 判断是否有环 [141](https://leetcode-cn.com/problems/linked-list-cycle/)
 
@@ -123,4 +127,24 @@ func removeElements(head *ListNode, val int) *ListNode {
 
 ##### 合并两个有序链表 [21](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
 
-##### 
+##### 其他
+
+- 203
+- 82
+- reverse 
+- 92
+- 83
+- 86
+- 328
+- 2
+- 445
+- 21
+- 24 重要
+- 25
+- 147
+- 148
+- 237
+- 19
+- 61
+- 143
+- 234

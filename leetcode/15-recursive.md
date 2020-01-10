@@ -9,11 +9,41 @@
 
 
 ##### 括号生成 [22](https://leetcode-cn.com/problems/generate-parentheses/)
+```
+func generateParenthesis(n int) []string {
+    res := make([]string, 0)
+    _gen(0,0,n,"",&res)
+    return res
+}
 
+func _gen(left, right, n int, s string, res *[]string ) {
+    if left == n && right == n {
+        *res = append(*res, s)
+        return  
+    }
+
+    if left < n {
+        _gen(left + 1, right, n, s + "(", res)
+    }
+
+    if right < left {
+        _gen(left, right + 1, n, s + ")", res)
+    }
+}
+```
 
 ##### 翻转二叉树 [226](https://leetcode-cn.com/problems/invert-binary-tree/description/)
 
 ##### 验证二叉搜索树 [98](https://leetcode-cn.com/problems/validate-binary-search-tree/)
+递归
+```go
+
+```
+
+中序遍历
+```go
+
+```
 
 ##### 二叉树的最大深度 [104](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
