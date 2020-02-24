@@ -16,16 +16,20 @@ func moveZeroes(nums []int)  {
 }
 
 func moveZeroes(nums []int)  {
-   j := 0 
-   for i := 0; i < len(nums); i ++ {
-       if nums[i] != 0 {
-           nums[j] = nums[i]
-           if i != j {
-               nums[i] = 0
-           }
-           j ++
-       }
-   }
+    lastNonZero := 0
+
+    for i := 0; i < len(nums); i ++ {
+        if nums[i] != 0 {
+            if i == lastNonZero {
+                lastNonZero ++
+                continue
+            }
+
+            nums[lastNonZero] = nums[i]
+            nums[i] = 0
+            lastNonZero ++
+        }
+    } 
 }
 
 ```
@@ -59,22 +63,21 @@ func maxArea(height []int) int {
 ##### 爬楼梯 [70](https://leetcode-cn.com/problems/climbing-stairs/)
 ```go
 func climbStairs(n int) int {
-    if n < 3 {
-        return n
-    }
+	if n < 4 {
+		return n
+	}
 
-    num := 0
-    a := 1
-    b := 2
-
-    for n > 2 {
-        num = a + b
-        a = b
-        b = num
-        n -- 
-    }
-
-    return num
+	num := 0
+	a := 2
+	b := 3
+	for n > 3 {
+		num = a + b
+		a = b
+		b = num
+		n--
+	}
+	
+	return num
 }
 ```
 ##### 两数之和 [1](https://leetcode-cn.com/problems/two-sum/)
@@ -127,7 +130,7 @@ func twoSum(nums []int, target int) []int {
 ```go
 
 func threeSum(nums []int) [][]int {
-    	sort.Ints(nums)
+    sort.Ints(nums)
 	res := make([][]int, 0)
 
 	for k := 0; k < len(nums)-2; k++ {
@@ -172,6 +175,8 @@ func threeSum(nums []int) [][]int {
 ```
 
 ##### 四数之和 [18](https://leetcode-cn.com/problems/4sum/)
+##### N 数之和 
+
 
 ##### 数组去重 [26](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 ```go

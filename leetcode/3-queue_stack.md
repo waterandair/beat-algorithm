@@ -1,25 +1,28 @@
 ##### 有效的括号 [20](https://leetcode-cn.com/problems/valid-parentheses/)
-```
-	right := map[string]string{")": "(", "]": "[", "}": "{"}
-
-	stack := []string{}
-
-	for _, str := range s {
-		if _, ok := right[string(str)]; ok {
-			if len(stack) == 0 || stack[len(stack)-1] != right[string(str)] {
-				return false
-			}
-			stack = stack[:len(stack)-1]
-		} else {
-			stack = append(stack, string(str))
-		}
-	}
-
-	if len(stack) != 0 {
-		return false
-	}
-
-	return true
+```go
+func isValid(s string) bool {
+         
+        right := map[string]string{")": "(", "]": "[", "}": "{"}
+     
+     	stack := []string{}
+     
+     	for _, str := range s {
+     		if _, ok := right[string(str)]; ok {
+     			if len(stack) == 0 || stack[len(stack)-1] != right[string(str)] {
+     				return false
+     			}
+     			stack = stack[:len(stack)-1]
+     		} else {
+     			stack = append(stack, string(str))
+     		}
+     	}
+     
+     	if len(stack) != 0 {
+     		return false
+     	}
+     
+     	return true
+}
 ```
 
 ##### 最小栈 [155](https://leetcode-cn.com/problems/min-stack/)
@@ -113,8 +116,54 @@ func (this *MinStack) GetMin() int {
 ```
 
 ##### 柱状图中最大的矩形 [84](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
+```
+func largestRectangleArea(heights []int) int {
+	maxArea := 0
+	for i := 0; i < len(heights); i++ {
+		minHeight := heights[i]
+		for j := i; j < len(heights); j++ {
+			if heights[j] < minHeight {
+				minHeight = heights[j]
+			}
+
+			area := minHeight * (j - i + 1)
+			if area > maxArea {
+				maxArea = area
+			}
+		}
+	}
+
+	return maxArea
+}
+```
+
+```
+func largestRectangleArea(heights []int) int {
+	maxArea := 0
+	for i := 0; i < len(heights); i++ {
+		left := i
+		right := i + 1
+
+		for left >= 0 && heights[left] >= heights[i] {
+			left--
+		}
+
+		for right < len(heights) && heights[right] >= heights[i] {
+			right++
+		}
+
+		area := heights[i] * (right - left - 1)
+		if area > maxArea {
+			maxArea = area
+		}
+	}
+
+	return maxArea
+}
+```
 
 ##### 滑动窗口最大值 [239](https://leetcode-cn.com/problems/sliding-window-maximum/)
+滑动窗口用队列
 
 #####  设计循环双端队列 [641](https://leetcode-cn.com/problems/design-circular-deque/)
 

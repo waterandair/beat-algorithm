@@ -1,6 +1,63 @@
 
 ##### 二叉树的层次遍历 [102](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/#/description)
 
+BFS
+```go
+func levelOrder(root *TreeNode) [][]int {
+    res := [][]int{}
+    if root == nil {
+        return res
+    }
+    
+    queue := []*TreeNode{root}
+
+    for len(queue)>0 {
+        vals := []int{}
+        nodes := []*TreeNode{}
+
+        for _, node := range queue{
+            vals = append(vals, node.Val)
+
+            if node.Left != nil {
+                nodes = append(nodes, node.Left)
+            }
+
+            if node.Right != nil {
+                nodes = append(nodes, node.Right)
+            }
+        }
+
+        queue = nodes
+        res = append(res, vals)
+    }
+
+
+    return res
+}
+```
+
+DFS
+```go
+func levelOrder(root *TreeNode) [][]int {
+    res := [][]int{}
+    helper(0, root, &res)
+    return res
+}
+
+func helper(level int, node *TreeNode, res *[][]int) {
+    if node == nil {
+        return 
+    }
+
+    if len(*res) <= level {
+        *res = append(*res, []int{})
+    }
+
+    (*res)[level] = append((*res)[level], node.Val)
+    helper(level+1, node.Left, res)
+    helper(level+1, node.Right, res)
+}
+```
 ##### 最小基因变化 [433](https://leetcode-cn.com/problems/minimum-genetic-mutation/#/description)
 
 ##### 括号生成 [22](https://leetcode-cn.com/problems/generate-parentheses/#/description)

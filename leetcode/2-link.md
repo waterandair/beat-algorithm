@@ -1,3 +1,9 @@
+##### 扩展阅读
+- https://www.jianshu.com/p/b1ab4a170c3c
+- https://leetcode-cn.com/problems/lru-cache/
+- https://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html
+- https://www.zhihu.com/question/20202931
+
 ##### 反转链表 [206](https://leetcode-cn.com/problems/reverse-linked-list/)
 ```go
 /**
@@ -129,7 +135,6 @@ func removeElements(head *ListNode, val int) *ListNode {
 
 ##### 其他
 
-- 203
 - 82
 - reverse 
 - 92
