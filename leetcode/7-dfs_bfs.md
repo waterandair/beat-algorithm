@@ -65,6 +65,59 @@ func helper(level int, node *TreeNode, res *[][]int) {
 ##### 在每个树行中找最大值 [515](https://leetcode-cn.com/problems/find-largest-value-in-each-tree-row/#/description)
 
 ##### 单词接龙 [127](https://leetcode-cn.com/problems/word-ladder/description/)
+```go
+func ladderLength(beginWord string, endWord string, wordList []string) int {
+	wordMap := make(map[string]bool)
+	for _, s := range wordList {
+		wordMap[s] = true
+	}
+
+	if !wordMap[endWord] {
+		return 0
+	}
+
+	queue := []string{beginWord}
+	step := 1
+
+	for len(queue) > 0 {
+		step++
+		subQueue := make([]string, 0)
+
+		for _, word := range queue {
+
+			for i, w := range word {
+				index := i
+				for m := []byte("a")[0]; m <= []byte("z")[0]; m++ {
+					if int32(m) == w {
+						continue
+					}
+
+					tempWord := []byte(word)
+					tempWord[index] = m
+
+					if string(tempWord) == endWord {
+						return step
+					}
+
+					if !wordMap[string(tempWord)] {
+						continue
+					}
+					
+					subQueue = append(subQueue, string(tempWord))
+					delete(wordMap, string(tempWord))
+					if len(wordMap) == 0 {
+						return 0
+					}
+				}
+			}
+		}
+
+		queue = subQueue
+	}
+
+	return 0
+}
+```
 
 ##### 单词接龙 II [126](https://leetcode-cn.com/problems/word-ladder-ii/description/)
 

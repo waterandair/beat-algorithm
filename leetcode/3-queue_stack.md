@@ -116,7 +116,8 @@ func (this *MinStack) GetMin() int {
 ```
 
 ##### 柱状图中最大的矩形 [84](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
-```
+```go
+// 暴力循环
 func largestRectangleArea(heights []int) int {
 	maxArea := 0
 	for i := 0; i < len(heights); i++ {
@@ -137,7 +138,8 @@ func largestRectangleArea(heights []int) int {
 }
 ```
 
-```
+```go
+// 找左右边界
 func largestRectangleArea(heights []int) int {
 	maxArea := 0
 	for i := 0; i < len(heights); i++ {
@@ -153,6 +155,43 @@ func largestRectangleArea(heights []int) int {
 		}
 
 		area := heights[i] * (right - left - 1)
+		if area > maxArea {
+			maxArea = area
+		}
+	}
+
+	return maxArea
+}
+```
+
+```go
+// 栈，原理还是通过找左右边界，栈中按升序，就可以依次找到左边界；进栈的时候判断是否小于栈顶元素就可以判断是否是右边界
+func largestRectangleArea(heights []int) int {
+	maxArea := 0
+	stack := make([]int, 0)
+	stack = append(stack, -1)
+
+	for i, h := range heights {
+
+		// 出栈
+		for len(stack) != 1 && h <= heights[stack[len(stack)-1]] {
+			height := heights[stack[len(stack)-1]]
+			stack = stack[:len(stack)-1]
+			area := height * (i - stack[len(stack)-1] - 1)
+			if area > maxArea {
+				maxArea = area
+			}
+		}
+
+		stack = append(stack, i)
+	}
+
+	// 清空栈
+	for len(stack) != 1 {
+		height := heights[stack[len(stack)-1]]
+		stack = stack[:len(stack)-1]
+
+		area := height * (len(heights) - stack[len(stack)-1] - 1)
 		if area > maxArea {
 			maxArea = area
 		}

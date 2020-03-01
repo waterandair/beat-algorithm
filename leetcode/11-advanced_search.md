@@ -5,8 +5,8 @@
 
 ##### N皇后 [51](https://leetcode-cn.com/problems/n-queens/)
 ###### N 皇后位运算代码示例
-```python
 
+```python
 	if n < 1: return [] 
 	self.count = 0 
 	self.DFS(n, 0, 0, 0, 0) 
