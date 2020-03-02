@@ -19,12 +19,12 @@ func reverseList(head *ListNode) *ListNode {
    }
 
     pre := reverseList(head.Next)
-
     head.Next.Next = head
     head.Next = nil
     return pre
 
 }
+
 ```
 
 ```go
@@ -32,6 +32,7 @@ func reverseList(head *ListNode) *ListNode {
     var pre *ListNode
 
     for head != nil {
+
         next := head.Next
 
         head.Next = pre
@@ -40,6 +41,16 @@ func reverseList(head *ListNode) *ListNode {
     }
 
     return pre
+}
+
+func reverseList(head *ListNode) *ListNode {
+	var pre *ListNode
+
+	for head != nil {
+		head.Next, pre, head = pre, head, head.Next
+	}
+
+	return pre
 }
 ```
 ##### 两两交换链表 [24](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)
@@ -63,6 +74,26 @@ func swapPairs(head *ListNode) *ListNode {
    return next
 }
 
+```
+
+```go
+func swapPairs(head *ListNode) *ListNode {
+    dummy := &ListNode{Val:0}
+    dummy.Next = head
+
+    temp := dummy
+    for temp.Next != nil && temp.Next.Next!= nil {
+        left := temp.Next
+        right := temp.Next.Next
+
+        temp.Next = right
+        left.Next = right.Next
+        right.Next = left
+        temp = left
+    }
+
+    return dummy.Next
+}
 ```
 
 ##### 203 删除链表中的元素
@@ -125,7 +156,20 @@ func removeElements(head *ListNode, val int) *ListNode {
 ```
 
 ##### 判断是否有环 [141](https://leetcode-cn.com/problems/linked-list-cycle/)
+```go
+func hasCycle(head *ListNode) bool {
+    fast, slow := head , head
+    for slow != nil && fast != nil && fast.Next != nil {
+        slow = slow.Next
+        fast = fast.Next.Next
+        if slow == fast {
+            return true
+        }
+    }
 
+    return false
+}
+```
 
 ##### 环形链表2 [142](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
 

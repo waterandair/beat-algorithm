@@ -25,6 +25,33 @@ func isValid(s string) bool {
 }
 ```
 
+```go
+func isValid(s string) bool {
+	m := map[rune]rune{'(': ')', '[': ']', '{': '}'}
+
+	stack := make([]rune, 0)
+	for _, v := range s {
+		// right
+		if m[v] == 0 {
+			if len(stack) == 0 || m[stack[len(stack)-1]] != v {
+				return false
+			}
+			stack = stack[:len(stack)-1]
+			continue
+		}
+
+		// left
+		stack = append(stack, v)
+	}
+
+	if len(stack) != 0 {
+		return false
+	}
+
+	return true
+}
+```
+
 ##### 最小栈 [155](https://leetcode-cn.com/problems/min-stack/)
 https://hansedong.github.io/2019/04/02/15/
 
