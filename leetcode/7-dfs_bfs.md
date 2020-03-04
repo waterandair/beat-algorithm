@@ -124,3 +124,5 @@ func ladderLength(beginWord string, endWord string, wordList []string) int {
 ##### 岛屿数量 [200](https://leetcode-cn.com/problems/number-of-islands/)
 
 ##### 扫雷游戏 [529](https://leetcode-cn.com/problems/minesweeper/description/)
+
+##### 腐烂的橘子[994](https://leetcode-cn.com/problems/rotting-oranges/)

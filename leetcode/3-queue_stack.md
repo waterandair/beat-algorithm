@@ -229,10 +229,188 @@ func largestRectangleArea(heights []int) int {
 ```
 
 ##### 滑动窗口最大值 [239](https://leetcode-cn.com/problems/sliding-window-maximum/)
-滑动窗口用队列
+```go
+// 堆
+```
+```go
+// 双端队列
+func maxSlidingWindow(nums []int, k int) []int {
+	if len(nums) <= 1 || k <= 1 {
+		return nums
+	}
+	res := make([]int, 0)
+	dequeue := make([]int, 0)
+
+	for i, num := range nums {
+		if len(dequeue) != 0 && (i-dequeue[0]) == k {
+			dequeue = dequeue[1:]
+		}
+
+		for len(dequeue) != 0 && num >= nums[dequeue[len(dequeue)-1]] {
+			dequeue = dequeue[:len(dequeue)-1]
+		}
+
+		dequeue = append(dequeue, i)
+
+		if i >= (k - 1) {
+			res = append(res, nums[dequeue[0]])
+		}
+	}
+
+	return res
+}
+```
 
 #####  设计循环双端队列 [641](https://leetcode-cn.com/problems/design-circular-deque/)
 
 ##### 接雨水 [42](https://leetcode-cn.com/problems/trapping-rain-water/)
 
-##### 
+##### 用队列实现栈 [225](https://leetcode-cn.com/problems/implement-stack-using-queues/)
+
+```go
+type Queue struct {
+	queue []int
+}
+
+type MyStack struct {
+	queue *Queue
+}
+
+/** Initialize your data structure here. */
+func Constructor() MyStack {
+	return MyStack{queue: NewQueue()}
+}
+
+/** Push element x onto stack. */
+func (this *MyStack) Push(x int) {
+	this.queue.Push(x)
+	for i := this.queue.Size() - 1; i > 0; i-- {
+		this.queue.Push(this.queue.Pop())
+	}
+}
+
+/** Removes the element on top of the stack and returns that element. */
+func (this *MyStack) Pop() int {
+	return this.queue.Pop()
+}
+
+/** Get the top element. */
+func (this *MyStack) Top() int {
+	return this.queue.Peek()
+}
+
+/** Returns whether the stack is empty. */
+func (this *MyStack) Empty() bool {
+	return this.queue.Size() == 0
+}
+
+func NewQueue() *Queue {
+	return &Queue{queue: make([]int, 0)}
+}
+
+func (q *Queue) Push(i int) {
+	q.queue = append(q.queue, i)
+}
+
+func (q *Queue) Pop() int {
+	pop := q.queue[0]
+	q.queue = q.queue[1:len(q.queue)]
+	return pop
+}
+
+func (q *Queue) Peek() int {
+	return q.queue[0]
+}
+
+func (q *Queue) Size() int {
+	return len(q.queue)
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * obj := Constructor();
+ * obj.Push(x);
+ * param_2 := obj.Pop();
+ * param_3 := obj.Top();
+ * param_4 := obj.Empty();
+ */
+
+```
+
+##### 用栈实现队列 [232](https://leetcode-cn.com/problems/implement-queue-using-stacks/submissions/)
+```go
+type MyQueue struct {
+	pushStack *Stack // 用于入队
+	popStack  *Stack // 用于出队
+}
+
+/** Initialize your data structure here. */
+func Constructor() MyQueue {
+	return MyQueue{
+		pushStack: NewStack(),
+		popStack:  NewStack(),
+	}
+}
+
+/** Push element x to the back of queue. */
+func (this *MyQueue) Push(x int) {
+	this.pushStack.Push(x)
+}
+
+/** Removes the element from in front of queue and returns that element. */
+func (this *MyQueue) Pop() int {
+	if this.popStack.Size() > 0 {
+		return this.popStack.Pop()
+	}
+
+	for this.pushStack.Size() > 0 {
+		this.popStack.Push(this.pushStack.Pop())
+	}
+
+	return this.popStack.Pop()
+}
+
+/** Get the front element. */
+func (this *MyQueue) Peek() int {
+	if this.popStack.Size() > 0 {
+		return this.popStack.Peek()
+	}
+
+	for this.pushStack.Size() > 0 {
+		this.popStack.Push(this.pushStack.Pop())
+	}
+
+	return this.popStack.Peek()
+}
+
+/** Returns whether the queue is empty. */
+func (this *MyQueue) Empty() bool {
+	return this.pushStack.Size() == 0 && this.popStack.Size() == 0
+}
+
+type Stack struct {
+	stack []int
+}
+
+func NewStack() *Stack {
+	return &Stack{stack: make([]int, 0)}
+}
+
+func (s *Stack) Push(x int) {
+	s.stack = append(s.stack, x)
+}
+
+func (s *Stack) Peek() int {
+	return s.stack[len(s.stack)-1]
+}
+
+func (s *Stack) Pop() int {
+	pop := s.stack[len(s.stack)-1]
+	s.stack = s.stack[0 : len(s.stack)-1]
+	return pop
+}
+
+func (s *Stack) Size() int {
+	return len(s.stack)
+}
+```
