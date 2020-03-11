@@ -1,8 +1,6 @@
 ##### lru 实现[146](https://leetcode-cn.com/problems/lru-cache/)
 
 ```golang
-
-
 type LinkNode struct {
 	key, val  int
 	pre, next *LinkNode
