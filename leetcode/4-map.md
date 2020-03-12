@@ -49,25 +49,25 @@ func groupAnagrams(strs []string) [][]string {
 
 ```go
 func groupAnagrams(strs []string) [][]string {
-	hash := make(map[[26]int][]string)
+    dict := make(map[[26]int][]string)
+    for _,s := range strs {
+        k := getKey(s)
+        dict[k] = append(dict[k],s)
+      
+    }
+    var res [][]string
+    for _,v := range dict {
+        res = append(res,v)
+    }
+    return res
+}
 
-	for i := 0; i < len(strs); i++ {
-		var letters [26]int
-
-		for j := 0; j < len(strs[i]); j++ {
-			letters[strs[i][j]-'a']++
-		}
-
-		hash[letters] = append(hash[letters], strs[i])
-	}
-
-	result, count := make([][]string, len(hash)), 0
-	for _, v := range hash {
-		result[count] = v
-		count++
-	}
-	// fmt.Println(result)
-	return result
+func getKey(s string) [26]int {
+    var k [26]int
+    for i := range s {
+        k[int(s[i]-'a')]++
+    }
+    return k
 }
 ```
 
