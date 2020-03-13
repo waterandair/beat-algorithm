@@ -130,47 +130,47 @@ func twoSum(nums []int, target int) []int {
 ```go
 
 func threeSum(nums []int) [][]int {
+    res := make([][]int, 0)
+    if len(nums) < 3 {
+        return res
+    }
     sort.Ints(nums)
-	res := make([][]int, 0)
 
-	for k := 0; k < len(nums)-2; k++ {
-		if nums[k] > 0 {
-			break
-		}
+    for i:=0; i<len(nums)-2; i++ {
+        if nums[i] > 0 {
+            break;
+        }
 
-		m := k + 1
-		n := len(nums) - 1
+        l := i+1
+        r := len(nums)-1
 
-		for m < n {
-			sum := nums[k] + nums[m] + nums[n]
-			switch {
-			case sum < 0:
-				m++
-			case sum > 0:
-				n--
-			default:
-				res = append(res, []int{nums[k], nums[m], nums[n]})
+        for l < r {
+            target := nums[i] + nums[l] + nums[r]
+            switch {
+                case target < 0 :
+                    l++
+                case target > 0 :
+                    r -- 
+                default:
+                    res = append(res, []int{nums[i], nums[l], nums[r]})
+                     for l < r && nums[l] == nums[l+1] {
+                        l++
+                    }
 
-				for m < n && nums[m] == nums[m+1] {
-					m++
-				}
-				for m < n && nums[n] == nums[n-1] {
-					n--
-				}
+                    for l < r && nums[r] == nums[r-1] {
+                        r--
+                    }
+                    l ++
+                    r --
+            }
+        }
 
-				m++
-				n--
+        for i < len(nums) - 2 && nums[i+1] == nums[i] {
+            i++
+        }
+    }
 
-			}
-		}
-
-		// 处理重复的 num[k]
-		for nums[k+1] == nums[k] && k < len(nums)-2 {
-			k++
-		}
-	}
-
-	return res
+    return res
 }
 ```
 
