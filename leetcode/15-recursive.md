@@ -88,50 +88,42 @@ func invertTree(root *TreeNode) *TreeNode {
 ##### 验证二叉搜索树 [98](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 递归
 ```go
+
 func isValidBST(root *TreeNode) bool {
-	return do(root, -1, -1)
+    return helper(root, math.MinInt64, math.MaxInt64)
 }
 
-func do(root *TreeNode, min, max int) bool {
-	if root == nil {
-		return true
-	}
+func helper(root *TreeNode, min, max int) bool {
+    if root == nil {
+        return true
+    }
+    if root.Val <= min || root.Val>=max {
+        return false
+    }
 
-	val := root.Val
-
-	if (min != -1 && val <= min) || (max != -1 && val >= max) {
-		return false
-	}
-
-	return do(root.Right, val, max) && do(root.Left, min, val)
+    return helper(root.Left, min, root.Val) && helper(root.Right, root.Val, max)
 }
 ```
 
 中序遍历/ 意外不能通过
 ```go
-var pre = math.MinInt64
+var last *TreeNode
 
 func isValidBST(root *TreeNode) bool {
+	last = &TreeNode{Val: -1 << 63}
+	return dfs(root)
+}
+
+func dfs(root *TreeNode) bool {
 	if root == nil {
 		return true
 	}
-	if !isValidBST(root.Left) {
+	if !dfs(root.Left) || root.Val <= last.Val {
 		return false
 	}
-
-	if pre >= root.Val {
-		return false
-	}
-
-	pre = root.Val
-
-	if !isValidBST(root.Right) {
-		return false
-	}
-
-	return true
+	last = root
+	return dfs(root.Right)
 }
-
 ```
 
 ##### 二叉树的最大深度 [104](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)

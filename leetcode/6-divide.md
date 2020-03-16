@@ -119,7 +119,7 @@ func count(nums []int, num, lo, hi int) int {
 ```go
 // 摩尔计数
 func majorityElement(nums []int) int {
-		cur, count := 0, 0
+	cur, count := 0, 0
 	for _, v := range nums {
 		if count == 0 {
 			cur = v

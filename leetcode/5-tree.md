@@ -40,3 +40,64 @@ func preOrder(root *TreeNode, res *[]int) {
 ##### N叉树的前序遍历 [589](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/)
 
 ##### N叉树的层序遍历 [429](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)
+
+##### 二叉树的最近公共祖先[236](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+```go
+ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+  if root == nil || root == p || root == q{
+      return root
+  }
+
+  left := lowestCommonAncestor(root.Left, p, q)
+  right := lowestCommonAncestor(root.Right, p, q)
+
+  if left != nil && right != nil {
+      return root
+  }
+
+  if left == nil {
+      return right
+  }
+
+  if right == nil {
+      return left
+  }
+  return nil
+}
+```
+
+##### 二叉搜索树的最近公共祖先[235](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree)
+```go
+func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+    if p.Val < root.Val && q.Val < root.Val {
+        return lowestCommonAncestor(root.Left, p, q)
+    }
+
+    if p.Val > root.Val && q.Val > root.Val {
+        return lowestCommonAncestor(root.Right, p, q)
+    }     
+
+    return root
+}
+```
+
+```go
+func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+    for root != nil {
+        if root.Val > p.Val && root.Val > q.Val {
+            root = root.Left
+            continue
+        }
+        
+        if root.Val < p.Val && root.Val < q.Val {
+            root = root.Right
+            continue
+        }
+
+        return root
+    }
+
+    return root
+}
+```
