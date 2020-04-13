@@ -1,4 +1,5 @@
-#### 数组
+### 数组
+#### 基础
 ##### 移动 0 [283](https://leetcode-cn.com/problems/move-zeroes/)
 ```go
 func moveZeroes(nums []int)  {
@@ -33,6 +34,8 @@ func moveZeroes(nums []int)  {
 }
 
 ```
+
+
 
 ##### 计算面积 [11](https://leetcode-cn.com/problems/container-with-most-water/submissions/)
 
@@ -205,6 +208,25 @@ func removeDuplicates(nums []int) int {
 
 
 ##### 合并两个有序数组 [88](https://leetcode-cn.com/problems/merge-sorted-array/)
+从后往前
+```go
+func merge(nums1 []int, m int, nums2 []int, n int)  {
+    for n > 0 && m > 0 {
+        if nums2[n-1] >= nums1[m-1] {
+            nums1[m+n-1] = nums2[n-1]
+            n --
+            continue
+        }
+
+        nums1[m+n - 1] = nums1[m-1]
+        m --
+    }
+
+    for i:=0; i<n ; i++ {
+        nums1[i] = nums2[i]
+    }
+}
+```
 
 ##### 加一 [66](https://leetcode-cn.com/problems/plus-one/)
 

@@ -184,6 +184,47 @@ func minDepth(root *TreeNode) int {
 
 ##### 从前序与中序遍历序列构造二叉树 [105](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
 
+```
+var preIndex int
+func buildTree(preorder []int, inorder []int) *TreeNode {
+    preIndex = 0
+    length := len(preorder)
+    if length == 0 || len(inorder) == 0 {
+        return nil
+    }
+
+    inorderMap := make(map[int]int)
+    for i, v := range inorder{
+        inorderMap[v] = i
+    }
+
+    return helper(preorder,inorder, inorderMap, 0, length-1)
+
+}
+
+func helper(preorder []int,inorder []int, inorderMap map[int]int, start, end int)*TreeNode {
+    if start > end {
+        return nil
+    }
+
+    node := &TreeNode{
+        Val: preorder[preIndex],
+    }
+
+    index := inorderMap[node.Val]
+    preIndex ++
+
+    node.Left = helper(preorder, inorder, inorderMap, start, index-1)
+    node.Right = helper(preorder, inorder, inorderMap, index+1, end)
+
+    return node
+}
+```
+##### 从后序与中序遍历序列构造二叉树[106] 
+
+```
+
+```
 ##### 组合 [77](https://leetcode-cn.com/problems/combinations/)
 
 ##### 全排列 [46](https://leetcode-cn.com/problems/permutations/)
